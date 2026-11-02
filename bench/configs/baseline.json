@@ -1,0 +1,9 @@
+{
+  "name": "baseline",
+  "about": "Default field (300 points, slight grouping, 4 piles of 60): reach k/M x rake half-width l.",
+  "base": {},
+  "grid": { "raker.kMul": [1, 1.5, 3], "raker.l": [0, 1.5, 4] },
+  "seeds": 20,
+  "algorithms": ["planned-sites", "tree-peel", "safe-greedy", "greedy-nearest", "random-safe"],
+  "lagrangian": true
+}

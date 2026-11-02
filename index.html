@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rake Leaves Math</title>
+  <meta name="description" content="Simulator and algorithm lab for raking scattered points into piles.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20 L14 6" /><path d="M10 4 L18 9 M12 2.8 L19.6 7.6 M8.2 5.4 L16.4 10.4" /><circle cx="6" cy="20" r="1.6" /><circle cx="10" cy="19" r="1.2" /><circle cx="8" cy="16.8" r="1" /></svg>
+      <h1>Rake Leaves Math</h1>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Mode">
+      <button role="tab" id="tab-watch" data-tab="watch" aria-selected="true">Watch</button>
+      <button role="tab" id="tab-play" data-tab="play" aria-selected="false">Play</button>
+      <button role="tab" id="tab-sweep" data-tab="sweep" aria-selected="false">Sweep</button>
+      <button role="tab" id="tab-bench" data-tab="bench" aria-selected="false">Benchmark</button>
+    </nav>
+    <div class="top-actions">
+      <button id="btn-theme" class="ghost" title="Switch light / dark">Theme</button>
+      <button id="btn-rules" class="ghost">Rules</button>
+      <button id="btn-share" class="ghost">Share code</button>
+    </div>
+  </header>
+
+  <main class="layout" id="layout">
+    <aside class="panel dials" id="dials" aria-label="Dials"></aside>
+
+    <section class="stage" id="stage" aria-label="Field">
+      <div class="stage-head" id="stage-head"></div>
+      <div class="canvas-wrap" id="canvas-wrap">
+        <canvas id="field" role="img" aria-label="The field: loose points, piles and the raker"></canvas>
+        <div class="tooltip" id="tooltip" hidden></div>
+      </div>
+      <div class="hint" id="hint"></div>
+      <div class="playbar" id="playbar">
+        <button id="pb-first" class="icon" title="Back to the start" aria-label="Back to the start">⏮</button>
+        <button id="pb-back" class="icon" title="Step back (←)" aria-label="Step back">◀</button>
+        <button id="pb-play" class="icon primary" title="Play / pause (space)" aria-label="Play">▶</button>
+        <button id="pb-fwd" class="icon" title="Step forward (→)" aria-label="Step forward">▶|</button>
+        <button id="pb-last" class="icon" title="Jump to the end" aria-label="Jump to the end">⏭</button>
+        <input id="pb-scrub" type="range" min="0" max="0" value="0" aria-label="Move number">
+        <span id="pb-pos" class="mono">0 / 0</span>
+        <label class="speed">Speed <input id="pb-speed" type="range" min="0" max="1" step="0.01" value="0.45" aria-label="Playback speed"></label>
+        <span id="pb-rate" class="mono"></span>
+      </div>
+    </section>
+
+    <aside class="panel readouts" id="readouts" aria-label="Readouts"></aside>
+
+    <section class="bench" id="sweep" hidden aria-label="Sweep"></section>
+    <section class="bench" id="bench" hidden aria-label="Benchmark"></section>
+  </main>
+
+  <dialog id="rules-dialog">
+    <form method="dialog">
+      <h2>The game</h2>
+      <p>A field holds <b>N</b> points. One raker must gather every point into exactly <b>n</b> piles, each holding at least <b>t</b> points.</p>
+      <ul>
+        <li><b>Start</b> on any point.</li>
+        <li><b>Rake</b> (click): drag a point or a whole pile within reach <b>k</b> into the pile you stand on. Every loose point within <b>l</b> of the stroke is swept in too (a capsule 2l wide). Raking onto a loose point you stand on turns it into a pile.</li>
+        <li><b>Walk</b> (shift-click): step onto any point or pile within k. Nothing moves.</li>
+        <li><b>Found</b> (F): turn the point you stand on into a pile of 1. Your frontier move is walk to r, found, then rake the old pile into it.</li>
+        <li><b>Never strand yourself.</b> Every loose point, and every pile that still needs points or a merge, must stay reachable through steps of at most k. Finished piles (at least t) may be cut off; they are frozen.</li>
+      </ul>
+      <p>The <b>spare points</b> s = N − n·t are a budget: every point a pile holds beyond t spends one, and a run fails ("starvation") once the remaining points can no longer fill every pile to t.</p>
+      <p><b>Score</b> = w₁·strokes/(N − n) + w₂·walk/(walk bound) + w₃·work/(work bound). Work charges every moved point its straight-line distance to its pile. Lower is better.</p>
+      <p>Toggles under <i>Rules</i> add push mode (push the object into any pile within k of it, ending there) and free pile placement.</p>
+      <div class="dialog-actions"><button value="close" class="primary">Close</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="share-dialog">
+    <form method="dialog">
+      <h2>Share code</h2>
+      <p>This code holds every dial, the seed and the algorithm. Paste one in and press Load to reproduce a setup exactly.</p>
+      <textarea id="share-text" rows="5" spellcheck="false"></textarea>
+      <p class="muted" id="share-msg"></p>
+      <div class="dialog-actions">
+        <button type="button" id="share-copy">Copy</button>
+        <button type="button" id="share-load">Load</button>
+        <button value="close" class="primary">Close</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script type="module" src="src/ui/app.js"></script>
+</body>
+</html>

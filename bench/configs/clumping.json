@@ -1,0 +1,9 @@
+{
+  "name": "clumping",
+  "about": "From no grouping to strong grouping (Thomas field, 300 points, k = 1.5 M).",
+  "base": {},
+  "grid": { "field.grouping": [0, 0.6, 2, 8] },
+  "seeds": 20,
+  "algorithms": ["planned-sites", "tree-peel", "safe-greedy", "greedy-nearest"],
+  "lagrangian": true
+}

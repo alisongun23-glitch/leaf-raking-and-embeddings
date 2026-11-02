@@ -1,0 +1,11 @@
+{
+  "name": "real-data",
+  "description": "Every algorithm on random 150-point samples of each real data set (fewer for sets with fewer points): 4 piles of at least 30, k = 1.5 M, l = 1.5. Seeds pick the samples.",
+  "base": { "field": { "N": 150 }, "goal": { "n": 4, "t": 30 }, "raker": { "kMode": "xM", "kMul": 1.5, "lMode": "abs", "l": 1.5 } },
+  "grid": {
+    "field.model": ["data:cholera", "data:brambles", "data:fiji-quakes", "data:california-quakes", "data:uk-airfields", "data:park-slope-trees", "data:caveolae", "data:old-faithful", "data:iris-petals", "data:mask-site"]
+  },
+  "seeds": 10,
+  "algorithms": ["planned-sites", "tree-peel", "safe-greedy", "greedy-nearest", "random-safe"],
+  "lagrangian": true
+}

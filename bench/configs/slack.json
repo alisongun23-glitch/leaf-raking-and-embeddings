@@ -1,0 +1,9 @@
+{
+  "name": "slack",
+  "about": "How spare points change the game: 300 points, 4 piles, t from 45 (s = 120) to 75 (s = 0).",
+  "base": {},
+  "grid": { "goal.t": [45, 55, 60, 70, 75] },
+  "seeds": 20,
+  "algorithms": ["planned-sites", "tree-peel", "safe-greedy", "greedy-nearest"],
+  "lagrangian": true
+}

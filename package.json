@@ -1,0 +1,16 @@
+{
+  "name": "rake-leaves-math",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Simulator and algorithm lab for raking scattered points into piles",
+  "scripts": {
+    "serve": "node scripts/serve.mjs",
+    "test": "node --test test/*.test.mjs",
+    "bench": "node bench/run.mjs bench/configs/baseline.json",
+    "bench:smoke": "node bench/run.mjs bench/configs/smoke.json"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

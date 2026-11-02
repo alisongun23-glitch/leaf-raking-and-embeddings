@@ -1,0 +1,9 @@
+{
+  "name": "smoke",
+  "about": "Quick check that every algorithm runs: small fields, two reach settings.",
+  "base": { "field": { "N": 150, "W": 60, "H": 60, "clumps": 5 }, "goal": { "n": 3, "t": 40 } },
+  "grid": { "raker.kMul": [1.2, 2] },
+  "seeds": 8,
+  "algorithms": ["planned-sites", "tree-peel", "safe-greedy", "greedy-nearest", "random-safe"],
+  "lagrangian": true
+}
