@@ -12,6 +12,15 @@ The repo has three parts:
 
 No dependencies and no build step: plain JavaScript modules that run in the browser and in Node ≥ 20.
 
+### Also in this repo: word-embedding research
+
+[`experiments/kinship-pca/`](experiments/kinship-pca/) asks whether kinship terms (father, son, grandmother, ...) have a clean local geometry in GloVe 6B 300-d vectors, using PCA on small word sets with frequency-matched random-set nulls and permutation tests. Everything is seeded and re-runs in about 77 seconds. Predictions were declared before running:
+
+- **Sex as PC1 held, decisively** (point-biserial r = 0.958 on a 15-term set). This rediscovers the known gender direction rather than finding something new.
+- **Generation as the second axis did not hold as predicted.** PC2 is word frequency, and generation shows up on PC3 (rho = 0.78), barely above the random-set null maximum of 0.77. The write-up says plainly that this is weaker than hoped.
+
+Start with [`results.md`](experiments/kinship-pca/results.md), and see [`reports/Local origins in word embeddings.md`](reports/Local%20origins%20in%20word%20embeddings.md) for the background.
+
 ```bash
 npm run serve          # http://localhost:5173  (or: node scripts/serve.mjs --port 5173)
 npm test               # node --test test/*.test.mjs
